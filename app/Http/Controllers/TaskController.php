@@ -6,6 +6,9 @@ use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
+use App\Filters\TaskFilter;
+use App\Http\Resources\TaskResource;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class TaskController extends Controller
@@ -13,10 +16,17 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $task = Task::paginate();
-        return new TaskCollection($task);
+        $filter = new TaskFilter();
+        $queryItems= $filter->transform($request);
+        $includeComments = $request->query('includeComments');
+
+        $task = Task::where($queryItems);
+        if($includeComments){
+            $task = Task::with('comment')->where($queryItems);
+        }
+        return new TaskCollection($task->paginate()->appends($request->query()));
     }
 
     /**
@@ -40,7 +50,11 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        $includeComments= request()->query('includeComments');
+        if($includeComments){
+            return new TaskResource($task->loadMissing('comment'));
+        }
+        return new TaskResource($task);
     }
 
     /**

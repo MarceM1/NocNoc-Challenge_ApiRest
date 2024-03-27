@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\TaskCollection;
 use App\Http\Resources\UserCollection;
-use App\Models\User;
+use App\Filters\UserFilter;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -15,10 +15,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $user = User::paginate();
-        return new UserCollection($user);
+        $filter = new UserFilter();
+        $queryItems= $filter->transform($request);
+        $includeTasks = $request->query('includeTasks');
+
+        $user = User::where($queryItems);
+        if($includeTasks){
+            $user = User::with('task.comment')->where($queryItems);
+        }
+        return new UserCollection($user->paginate()->appends($request->query()));
     }
 
     /**

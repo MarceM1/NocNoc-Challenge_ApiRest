@@ -33,7 +33,7 @@ class TaskFactory extends Factory
             'status' => $status,
             'due_date' => $dueDate,
             'assigned_user_id' => $randomUserId, //Usuario aleatorio
-            'created_by_id' => $randomAdmin //Admin aleatorio
+            'user_id' => $randomAdmin //Admin aleatorio
         ];
     }
 }
