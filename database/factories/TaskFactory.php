@@ -17,15 +17,23 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $title = fake()->sentence();
+        $description = fake()->paragraph();
+        $status = fake()->randomElement(['pendiente', 'en_proceso', 'bloqueado', 'completado']);
+        $dueDate = fake()->dateTimeBetween('+1 week', '+1 month');
+
         $users = User::all();
         $randomUserId = $users->random()->id;
+        $admin = User::where('role', 0)->get();
+        $randomAdmin = $admin->random()->id;
+
         return [
-            'title' => fake()->sentence(),
-            'description' => fake()->paragraph(),
-            'status' => fake()->randomElement(['pendiente', 'en_proceso', 'bloqueado', 'completado']),
-            'due_date' => fake()->dateTimeBetween('+1 week', '+1 month'), // Set due date within a range
-            'assigned_user_id' => null, // Can be set manually later
-            'created_by_id' => $randomUserId
+            'title' => $title,
+            'description' => $description,
+            'status' => $status,
+            'due_date' => $dueDate,
+            'assigned_user_id' => $randomUserId, //Usuario aleatorio
+            'created_by_id' => $randomAdmin //Admin aleatorio
         ];
     }
 }

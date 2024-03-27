@@ -22,15 +22,20 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {   
-
+    {
+        $name = fake()->name();
+        $role = fake()->numberBetween(0, 1);
+        $email = fake()->unique()->safeEmail();
+        $password = Hash::make('password');
+        $remenberToken = Str::random(10);
+        
         return [
-            'name' => fake()->name(),
-            'role'=>fake()->numberBetween(0,1),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $name,
+            'role' => $role,
+            'email' => $email,
             'email_verified_at' => now(),
-            'password' =>  Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' =>  $password,
+            'remember_token' => $remenberToken,
         ];
     }
 

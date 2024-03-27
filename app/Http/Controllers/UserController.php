@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
-use App\Http\Resources\CommentCollection;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\TaskCollection;
+use App\Http\Resources\UserCollection;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class CommentController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $comment = Comment::paginate();
-        return new CommentCollection($comment);
+    {   
+        $user = User::paginate();
+        return new UserCollection($user);
     }
 
     /**
@@ -30,7 +32,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommentRequest $request)
+    public function store(StoreUserRequest $request)
     {
         //
     }
@@ -38,7 +40,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(User $user)
     {
         //
     }
@@ -46,7 +48,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comment)
+    public function edit(User $user)
     {
         //
     }
@@ -54,7 +56,7 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //
     }
@@ -62,8 +64,9 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(User $user)
     {
         //
     }
+
 }

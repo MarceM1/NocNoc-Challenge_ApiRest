@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Requests\UpdateFileRequest;
+use App\Http\Resources\FileCollection;
+use Illuminate\Routing\Controller;
 
 class FileController extends Controller
 {
@@ -13,7 +15,8 @@ class FileController extends Controller
      */
     public function index()
     {
-        //
+        $file = File::paginate();
+        return new FileCollection($file);
     }
 
     /**

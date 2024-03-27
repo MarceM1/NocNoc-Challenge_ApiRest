@@ -18,12 +18,14 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
+        $content = fake()->paragraph();
         $users = User::all();
         $randomUserId = $users->random()->id;
         $task = Task::all();
         $randomTaskId = $task->random()->id;
+        
         return [
-            'content' => fake()->paragraph(),
+            'content' => $content,
             'task_id' => $randomTaskId,
             'user_id' => $randomUserId,
 

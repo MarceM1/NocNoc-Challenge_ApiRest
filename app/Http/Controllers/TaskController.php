@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Resources\TaskCollection;
+use Illuminate\Routing\Controller;
 
 class TaskController extends Controller
 {
@@ -13,7 +15,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $task = Task::paginate();
+        return new TaskCollection($task);
     }
 
     /**
