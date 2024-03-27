@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'file_uri',
+        'type',
+        'size',
+        'task_id',
+        'user_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Filters\UserFilter;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -41,7 +42,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        return new UserResource(User::create($request->all()));
     }
 
     /**
