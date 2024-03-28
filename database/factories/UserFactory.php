@@ -24,7 +24,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $name = fake()->name();
-        $role = fake()->numberBetween(0, 1);
+        $role = fake()->string('admin','user');
         $email = fake()->unique()->safeEmail();
         $password = Hash::make('password');
         $remenberToken = Str::random(10);

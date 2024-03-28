@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name'=>['required'],
-            'role'=>['required', Rule::in(0,1)],
+            'role'=>['required', Rule::in('admin','user')],
             'email'=>['required', 'email'],
             'password'=>['required']
         ];

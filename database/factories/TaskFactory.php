@@ -24,7 +24,7 @@ class TaskFactory extends Factory
 
         $users = User::all();
         $randomUserId = $users->random()->id;
-        $admin = User::where('role', 0)->get();
+        $admin = User::where('role', 'admin')->get();
         $randomAdmin = $admin->random()->id;
 
         return [
