@@ -17,7 +17,7 @@ Api Rest desarrollada en Laravel 11. Implementa distintas herramientas propias d
 
 ## BASH
 
-- [cd] xy-apiRes
+- [cd] xy-apiRest
 - [php] artisan serve
 
   Puerto por defecto http://127.0.0.1:8000
